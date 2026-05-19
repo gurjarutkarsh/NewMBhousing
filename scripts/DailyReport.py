@@ -1,0 +1,1 @@
+from InventoryTool.models import Visit, NewVisit
