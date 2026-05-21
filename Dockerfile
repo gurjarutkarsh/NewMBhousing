@@ -1,15 +1,21 @@
-FROM python:3.9
 
-ENV DB_USER="postgres"
+FROM python:3.13-slim
 
-WORKDIR /firstdocker
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libpq-dev \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
 
+RUN pip install --upgrade pip setuptools wheel
 RUN pip install -r requirements.txt
 
 COPY . .
 
-EXPOSE 8001
+EXPOSE 8000
 
-CMD ["python", "manage.py", "runserver"]
+CMD ["gunicorn", "-c", "gunicorn.conf.py", "MBInventoryTool.wsgi:application"]

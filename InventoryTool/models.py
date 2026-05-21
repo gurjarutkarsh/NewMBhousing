@@ -240,6 +240,10 @@ class ApartmentSales(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        verbose_name = "Apartment Sales"
+        verbose_name_plural = "Apartment Sales"
+
     def __str__(self):
         return f"{self.apartment} - {self.pre_sales_name} - {self.sales_person_name}"
 
@@ -253,6 +257,11 @@ class Negatives(models.Model):
     negatives = models.TextField(max_length=2000, null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Negative"
+        verbose_name_plural = "Negatives"
+
 
 
 class Attendance(models.Model):

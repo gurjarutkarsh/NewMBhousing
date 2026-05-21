@@ -1,8 +1,26 @@
-version: '3.9'
-
 services:
-  django:
-    image: django-docker:0.0.1
-    build: .
+  db:
+    image: postgres:17
+    container_name: mbhousing_postgres
+    environment:
+      POSTGRES_DB: finaldatabase
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
     ports:
-      -"8001:8001"
+      - "5432:5432"
+
+  web:
+    build: .
+    container_name: mbhousing_web
+    command: gunicorn -c gunicorn.conf.py MBInventoryTool.wsgi:application
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:

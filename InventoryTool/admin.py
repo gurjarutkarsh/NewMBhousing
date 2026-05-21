@@ -1,6 +1,6 @@
 from datetime import date
 import datetime
-
+from django.utils.safestring import mark_safe
 from django.contrib import admin
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
@@ -398,7 +398,7 @@ class ApartmentAdmin(admin.ModelAdmin):
             html_str += "<li> direction => " + direction + "</li>"
         html_str += "</ul>"
         #html_str = html_str + "</br>" + '&nbsp;' * 150
-        return format_html(html_str)
+        return mark_safe(html_str)
 
     def location_group(self, obj):
         return obj.project.location_group
@@ -441,7 +441,7 @@ class ApartmentAdmin(admin.ModelAdmin):
             html_str += "<li>" + pt + "</li>"
         html_str += "</ul>"
         html_str = html_str + "</br>" + '&nbsp;' * 150
-        return format_html(html_str)
+        return mark_safe(html_str)
 
     @admin.display(description="Details")
     def details(self, obj):
@@ -480,7 +480,7 @@ class ApartmentAdmin(admin.ModelAdmin):
 
         html_str += "</table>"
 
-        return format_html(html_str)
+        return mark_safe(html_str)
 
     @admin.display(description="Proj Details")
     def proj_details(self, obj):
@@ -537,7 +537,7 @@ class ApartmentAdmin(admin.ModelAdmin):
 
 
         #html_str = "<ul>" + land_parcel + constt + no_of_towers + "</ul>" + "</br>" + '&nbsp;' * 50
-        return format_html(html_str)
+        return mark_safe(html_str)
 
 
 
@@ -665,7 +665,7 @@ class NegativesAdmin(admin.ModelAdmin):
             html_str += "<li>" + pt + "</li>"
         html_str += "</ul>"
         html_str = html_str + "</br>" + '&nbsp;' * 150
-        return format_html(html_str)
+        return mark_safe(html_str)
 
 
 
@@ -783,7 +783,7 @@ class DailyPotentialClientsAdmin(admin.ModelAdmin):
         html_str += "<li> status -> " + obj.rating + "</li>"
         #html_str += "<li> rating -> " + str(obj.client_rating) + "</li>"
         html_str += "</ul>"
-        return format_html(html_str)
+        return mark_safe(html_str)
 
     @admin.display(description="Budget / Location")
     def client_budget_location(self, obj):
@@ -796,7 +796,7 @@ class DailyPotentialClientsAdmin(admin.ModelAdmin):
         if obj.location:
             html_str += "<li>" + str(obj.location) + "</li>"
         html_str += "</ul>"
-        return format_html(html_str)
+        return mark_safe(html_str)
 
     @admin.display(description="Details")
     def details(self, obj):
@@ -808,7 +808,7 @@ class DailyPotentialClientsAdmin(admin.ModelAdmin):
                 html_str += "<li>" + pt + "</li>"
             html_str += "</ul>"
             html_str = html_str + "</br>" + '&nbsp;' * 15
-            return format_html(html_str)
+            return mark_safe(html_str)
 
     def get_form(self, request, *args, **kwargs):
         form = super(DailyPotentialClientsAdmin, self).get_form(request, *args, **kwargs)
@@ -884,7 +884,7 @@ class HikeCallAdmin(admin.ModelAdmin):
         if obj.client_details:
             html_str += "<li>" + str(obj.client_details) + "</li>"
         html_str += "</ul>"
-        return format_html(html_str)
+        return mark_safe(html_str)
 
 
 
@@ -929,7 +929,7 @@ class NewVisitAdmin(admin.ModelAdmin):
                 html_str += "<li>" + str(p) + "</li>"
             html_str += "</ul>"
             html_str = html_str + "</br>" + '&nbsp;' * 50
-            return format_html(html_str)
+            return mark_safe(html_str)
 
     def sales(self, obj):
         return obj.sales_person
@@ -944,7 +944,7 @@ class NewVisitAdmin(admin.ModelAdmin):
 
         html_str += "</ul>"
         html_str = html_str + "</br>" + '&nbsp;' * 20
-        return format_html(html_str)
+        return mark_safe(html_str)
 
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
